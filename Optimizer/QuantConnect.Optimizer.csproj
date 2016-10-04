@@ -56,7 +56,6 @@
     <Compile Include="Optimizers\RandomOptimizer.cs" />
     <Compile Include="Optimizers\GenericOptimizer.cs" />
     <Compile Include="Optimizers\GridSearchOptimizer.cs" />
-    <Compile Include="Program - Copy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunClass.cs" />
