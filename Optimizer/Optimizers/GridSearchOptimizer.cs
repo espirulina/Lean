@@ -12,9 +12,9 @@ namespace QuantConnect.Optimizer.Optimizers
     /// </summary>
     public class GridSearchOptimizer : GenericOptimizer
     {
-        public Dictionary<string, string> Optimize()
+        public override Dictionary<string, string> Optimize() 
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            var parameters = new Dictionary<string, string>();
 
             //TODO => Logic of optimization
 
@@ -25,7 +25,7 @@ namespace QuantConnect.Optimizer.Optimizers
         /// </summary>
         /// <param name="result"> Last set of results
         /// <returns> New parameter set to backtest over.</returns>
-        public Dictionary<string, string> Optimize(BacktestResult result)
+        public override Dictionary<string, string> Optimize(BacktestResult result)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 

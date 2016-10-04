@@ -7,8 +7,8 @@ using QuantConnect.Packets;
 namespace QuantConnect.Optimizer.Optimizers
 {
   public class RandomOptimizer : GenericOptimizer
-    {
-        public RandomOptimizer()
+  {
+        public RandomOptimizer() : base()
         {
 
         }
@@ -17,14 +17,14 @@ namespace QuantConnect.Optimizer.Optimizers
         {
             
         }
-
-        public new Dictionary<string, string> Optimize()
+        
+        public override Dictionary<string, string> Optimize()
         {
             // Create 5 Random parameter sets
-            Random rnd = new Random();
+            var rnd = new Random();
             for (int i = 0; i < 5; i++)
             {
-                Dictionary<string, string> set = new Dictionary<string, string>();
+                var set = new Dictionary<string, string>();
                 foreach (var key in parametersKeys)
                 {
                     string param = Convert.ToDecimal(rnd.NextDouble()).ToString();
@@ -34,14 +34,14 @@ namespace QuantConnect.Optimizer.Optimizers
             }
 
             // Foreach set run a simulation backtest
-            List<Dictionary<string, string>> statistics = new List<Dictionary<string, string>>();
+            var statistics = new List<Dictionary<string, string>>();
 
             foreach (Dictionary<string, string> paramSet in parameterSets)
             {
                 _algo.SetParameters(paramSet);
 
                 LaunchEngine();
-                BacktestingResultHandler resultshandler = (BacktestingResultHandler) _resultshandler;
+                var resultshandler = (BacktestingResultHandler) _resultshandler;
 
                 statistics.Add(resultshandler.FinalStatistics);
             }
@@ -53,7 +53,7 @@ namespace QuantConnect.Optimizer.Optimizers
             decimal maxRatio = 0;
             for (int i = 0; i < parameterSets.Count; i++)
             {
-                decimal ratio = Convert.ToDecimal(statistics[i]["ratio"]);
+                decimal ratio = Convert.ToDecimal(statistics[i]["Sharpe Ratio"]);
                 if (ratio > maxRatio)
                 {
                     maxRatio = ratio;
@@ -66,9 +66,9 @@ namespace QuantConnect.Optimizer.Optimizers
             return bestParameters;
         }
 
-        public Dictionary<string, string> Optimize(BacktestResult result)
+        public override Dictionary<string, string> Optimize(BacktestResult result)
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            var parameters = new Dictionary<string, string>();
 
             //TODO => Logic of optimization
 

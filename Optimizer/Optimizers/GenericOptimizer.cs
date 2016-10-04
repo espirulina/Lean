@@ -25,7 +25,7 @@ namespace QuantConnect.Optimizer.Optimizers
     ///  A GenericOptimizer would remember breed its parameter sets as to get the best 
     /// results and generate new ones.
     /// </summary>
-    public class GenericOptimizer : IOptimizer
+    public abstract class GenericOptimizer : IOptimizer
     {
         private Api.Api _api;
         private Messaging.Messaging _notify;
@@ -47,10 +47,23 @@ namespace QuantConnect.Optimizer.Optimizers
 
         public GenericOptimizer()
         {
+          
         }
 
-        public  GenericOptimizer(QCAlgorithm algo)
+        public GenericOptimizer(QCAlgorithm algo)
         {
+            parametersKeys = new List<string>();
+            JObject parameters = JObject.Parse(Config.Get(key: "parameters"));
+
+            foreach (var param in parameters)
+            {
+                parametersKeys.Add(param.Key);
+            }
+
+            // Logic of optimization
+            parameterSets = new List<Dictionary<string, string>>();
+
+            bestParameters = new Dictionary<string, string>();
             _algo = algo;
         }
         
@@ -102,31 +115,9 @@ namespace QuantConnect.Optimizer.Optimizers
         }
 
 
-        public Dictionary<string, string> Optimize(BacktestResult result)
-        {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+        public abstract Dictionary<string, string> Optimize(BacktestResult result);
 
-            //TODO => Logic of optimization
+        public abstract Dictionary<string, string> Optimize();
 
-            return parameters;
-        }
-
-        public Dictionary<string, string> Optimize()
-        {
-            parametersKeys = new List<string>();
-            var parameters = JObject.Parse(Config.Get("parameters"));
-            
-            foreach (var param in parameters)
-            {
-                parametersKeys.Add(param.Key);
-            }
-
-            // Logic of optimization
-            parameterSets = new List<Dictionary<string, string>>();
-
-            bestParameters = new Dictionary<string, string>();
-            
-            return bestParameters;
-        }
     }
 }

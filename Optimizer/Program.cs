@@ -19,18 +19,18 @@ namespace QuantConnect.Optimizer
         {
             try
             {
-                Log.Trace("QuantConnect.Optimizer() --------------------------------------");
+                Log.Trace(traceText: "QuantConnect.Optimizer() --------------------------------------");
 
                 //TODO Load Algo by name and not by object
-                ParameterizedAlgorithm algo = new ParameterizedAlgorithm();
+                var algo = new ParameterizedAlgorithm();
 
-                RandomOptimizer rndOptimizer = new RandomOptimizer(algo);
+                var rndOptimizer = new RandomOptimizer(algo);
 
                 algo.SetOptimizer(rndOptimizer);
 
                 Log.Trace("QuantConnect.Optimizer(): " + " Random Optimizer set in Algo: " + algo.Name);
 
-                Dictionary<string, string> optimizedParameters = algo.Optimizer.Optimize();
+                var optimizedParameters = algo.Optimizer.Optimize();
 
                 Log.Trace("QuantConnect.Optimizer(): " + "Optimized Parameters:");
                 foreach (var param in optimizedParameters.Keys)
@@ -40,7 +40,8 @@ namespace QuantConnect.Optimizer
             }
             catch (Exception ex)
             {
-                  Log.Trace("QuantConnect.Optimizer(): " + ex.Message);
+                  Log.Error("QuantConnect.Optimizer(): " + ex.Message);
+                Log.Error("QuantConnect.Optimizer(): " + ex.StackTrace);
             }
 
             Console.ReadLine();

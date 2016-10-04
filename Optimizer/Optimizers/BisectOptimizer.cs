@@ -8,21 +8,21 @@ namespace QuantConnect.Optimizer.Optimizers
     /// </summary>
     public class BisectOptimizer : GenericOptimizer
     {
-        public BisectOptimizer()
+        public BisectOptimizer() : base()
         {
             
         }
-        public Dictionary<string, decimal> Optimize()
+        public override Dictionary<string, string> Optimize()
         {
-            Dictionary<string, decimal> parameters = new Dictionary<string, decimal>();
+            var parameters = new Dictionary<string, string>();
 
             //TODO => Logic of optimization
 
             return parameters;
         }
-        public Dictionary<string, decimal> Optimize(BacktestResult result)
+        public override Dictionary<string, string> Optimize(BacktestResult result)
         {
-            Dictionary<string, decimal> parameters = new Dictionary<string, decimal>();
+            var parameters = new Dictionary<string, string>();
 
             //TODO => Logic of optimization
 
