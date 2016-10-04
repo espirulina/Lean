@@ -24,7 +24,9 @@ namespace QuantConnect.Optimizer
                 //TODO Load Algo by name and not by object
                 ParameterizedAlgorithm algo = new ParameterizedAlgorithm();
 
-                algo.SetOptimizer(new RandomOptimizer(algo));
+                RandomOptimizer rndOptimizer = new RandomOptimizer(algo);
+
+                algo.SetOptimizer(rndOptimizer);
 
                 Log.Trace("QuantConnect.Optimizer(): " + " Random Optimizer set in Algo: " + algo.Name);
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text;
+using Newtonsoft.Json.Linq;
 using QuantConnect.Algorithm;
 using QuantConnect.Configuration;
 using QuantConnect.Interfaces;
@@ -16,7 +18,6 @@ using QuantConnect.Logging;
 using QuantConnect.Packets;
 using QuantConnect.Queues;
 using QuantConnect.Util;
-using QuantConnect.Algorithm.CSharp;
 
 namespace QuantConnect.Optimizer.Optimizers
 {
@@ -42,7 +43,7 @@ namespace QuantConnect.Optimizer.Optimizers
         protected QCAlgorithm _algo;
         protected List<Dictionary<string, string>> parameterSets;
         protected Dictionary<string, string> bestParameters;
-        protected Dictionary<string, string>.KeyCollection parametersKeyCollection;
+        protected List<string> parametersKeys;
 
         public GenericOptimizer()
         {
@@ -112,8 +113,14 @@ namespace QuantConnect.Optimizer.Optimizers
 
         public Dictionary<string, string> Optimize()
         {
-            parametersKeyCollection = this._algo.GetParametersKeysCollection();
+            parametersKeys = new List<string>();
+            var parameters = JObject.Parse(Config.Get("parameters"));
             
+            foreach (var param in parameters)
+            {
+                parametersKeys.Add(param.Key);
+            }
+
             // Logic of optimization
             parameterSets = new List<Dictionary<string, string>>();
 

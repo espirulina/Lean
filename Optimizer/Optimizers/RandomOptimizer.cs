@@ -25,7 +25,7 @@ namespace QuantConnect.Optimizer.Optimizers
             for (int i = 0; i < 5; i++)
             {
                 Dictionary<string, string> set = new Dictionary<string, string>();
-                foreach (var key in parametersKeyCollection)
+                foreach (var key in parametersKeys)
                 {
                     string param = Convert.ToDecimal(rnd.NextDouble()).ToString();
                     set.Add(key, param);
