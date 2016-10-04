@@ -27,7 +27,9 @@ using QuantConnect.Data.UniverseSelection;
 using QuantConnect.Indicators;
 using QuantConnect.Interfaces;
 using QuantConnect.Notifications;
+using QuantConnect.Optimizers;
 using QuantConnect.Orders;
+using QuantConnect.Packets;
 using QuantConnect.Parameters;
 using QuantConnect.Scheduling;
 using QuantConnect.Securities;
@@ -933,6 +935,17 @@ namespace QuantConnect.Algorithm
         {
             get;
             private set;
+        }
+
+        public IOptimizer Optimizer
+        {
+            get;
+            private set;
+        }
+
+        public void SetOptimizer(IOptimizer optimizer)
+        {
+            Optimizer = optimizer;
         }
 
         /// <summary>

@@ -12,6 +12,14 @@ namespace QuantConnect.Optimizers
     /// </summary>
     public class GridSearchOptimizer : IOptimizer
     {
+        public Dictionary<string, string> Optimize()
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            //TODO => Logic of optimization
+
+            return parameters;
+        }
         /// <summary>
         /// GridSearchOptimizer would take in the last set of results; and return a new parameter set to backtest over.
         /// </summary>

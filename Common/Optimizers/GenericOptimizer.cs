@@ -9,6 +9,14 @@ namespace QuantConnect.Optimizers
     /// </summary>
     public class GenericOptimizer : IOptimizer
     {
+        public Dictionary<string, string> Optimize()
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            //TODO => Logic of optimization
+
+            return parameters;
+        }
         public Dictionary<string, string> Optimize(BacktestResult result)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();

@@ -8,6 +8,8 @@ namespace QuantConnect.Optimizers
     /// </summary>
     public interface IOptimizer
     {
+        Dictionary<string, string> Optimize();
+
         /// <summary>
         /// IOptimizer would take in the last set of results; and return a new parameter set to backtest over.
         /// </summary>

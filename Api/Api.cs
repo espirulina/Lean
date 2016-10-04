@@ -148,5 +148,16 @@ namespace QuantConnect.Api
         {
             // NOP
         }
+
+        /// <summary>
+        /// Set the Optimizer
+        /// </summary>
+        /// <param name="name">The selected optimizer name</param>
+        public virtual void SetOptimizer(string name)
+        {
+            //
+        }
+
+        
     }
 }
