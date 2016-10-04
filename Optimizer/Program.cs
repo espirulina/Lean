@@ -1,34 +1,47 @@
 ﻿using System;
 using QuantConnect;
-using QuantConnect.Algorithm.CSharp;
 using QuantConnect.Algorithm;
-using QuantConnect.Optimizers;
 using System.Threading;
 using System.Reflection;
 using System.Collections.Generic;
 using QuantConnect.Logging;
+using QuantConnect.Optimizer.Optimizers;
 using QuantConnect.Packets;
+using QuantConnect.Algorithm.CSharp;
 
 namespace QuantConnect.Optimizer
 {
     //An executable project taking an IAlgorithm object and launching backtests.
-    class Program
+    public class Program
     {
-        private static AppDomainSetup _ads;
-        private static string _callingDomainName;
-        private static string _exeAssembly;
 
         public static void Main(string[] args)
         {
-            //TODO Load Algo by name and not by object
-            ParameterizedAlgorithm algo = new ParameterizedAlgorithm();
+            try
+            {
+                Log.Trace("QuantConnect.Optimizer() --------------------------------------");
 
-            BacktestResult result;
+                //TODO Load Algo by name and not by object
+                ParameterizedAlgorithm algo = new ParameterizedAlgorithm();
 
-            algo.SetOptimizer(new GenericOptimizer());
+                algo.SetOptimizer(new RandomOptimizer(algo));
 
-            Dictionary<string,string> optimizedParameters = algo.Optimizer.Optimize();
+                Log.Trace("QuantConnect.Optimizer(): " + " Random Optimizer set in Algo: " + algo.Name);
 
+                Dictionary<string, string> optimizedParameters = algo.Optimizer.Optimize();
+
+                Log.Trace("QuantConnect.Optimizer(): " + "Optimized Parameters:");
+                foreach (var param in optimizedParameters.Keys)
+                {
+                    Log.Trace("QuantConnect.Optimizer(): " + param + ": " + optimizedParameters[param]);
+                }
+            }
+            catch (Exception ex)
+            {
+                  Log.Trace("QuantConnect.Optimizer(): " + ex.Message);
+            }
+
+            Console.ReadLine();
 
         }
      

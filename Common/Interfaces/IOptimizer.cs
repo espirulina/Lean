@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QuantConnect.Packets;
 
-namespace QuantConnect.Optimizers
+namespace QuantConnect.Interfaces
 {
     /// <summary>
     /// Allow users to set the optimization technique to use. Set the IOptimizer which will generate the parameter sets to backtest.
@@ -16,5 +16,6 @@ namespace QuantConnect.Optimizers
         /// <param name="result"> Last set of results
         /// <returns> New parameter set to backtest over.</returns>
         Dictionary<string, string> Optimize(BacktestResult result);
+        
     }
 }

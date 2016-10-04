@@ -27,7 +27,6 @@ using QuantConnect.Data.UniverseSelection;
 using QuantConnect.Indicators;
 using QuantConnect.Interfaces;
 using QuantConnect.Notifications;
-using QuantConnect.Optimizers;
 using QuantConnect.Orders;
 using QuantConnect.Packets;
 using QuantConnect.Parameters;
@@ -40,6 +39,7 @@ using QuantConnect.Securities.Option;
 using QuantConnect.Statistics;
 using QuantConnect.Util;
 using SecurityTypeMarket = System.Tuple<QuantConnect.SecurityType, string>;
+
 
 namespace QuantConnect.Algorithm
 {
@@ -525,6 +525,11 @@ namespace QuantConnect.Algorithm
         {
             string value;
             return _parameters.TryGetValue(name, out value) ? value : null;
+        }
+
+        public Dictionary<string,string>.KeyCollection GetParametersKeysCollection()
+        {
+            return _parameters.Keys;
         }
 
         /// <summary>

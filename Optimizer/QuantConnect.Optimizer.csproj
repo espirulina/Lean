@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Optimizers\BisectOptimizer.cs" />
+    <Compile Include="Optimizers\RandomOptimizer.cs" />
+    <Compile Include="Optimizers\GenericOptimizer.cs" />
+    <Compile Include="Optimizers\GridSearchOptimizer.cs" />
     <Compile Include="Program - Copy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

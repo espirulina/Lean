@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QuantConnect.Packets;
 
-namespace QuantConnect.Optimizers
+namespace QuantConnect.Optimizer.Optimizers
 {
     /// <summary>
     /// "GridSearchOptimization" would be called once with no results at the start; 
@@ -10,7 +10,7 @@ namespace QuantConnect.Optimizers
     ///  A GenericOptimizer would remember breed its parameter sets as to get the best 
     /// results and generate new ones. Bisect optimizer could bisect and skip large empty parts
     /// </summary>
-    public class GridSearchOptimizer : IOptimizer
+    public class GridSearchOptimizer : GenericOptimizer
     {
         public Dictionary<string, string> Optimize()
         {
