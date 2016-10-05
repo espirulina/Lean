@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FitnessFunctions\RandomFitnessFunction.cs" />
+    <Compile Include="Interfaces\IFitnessFunction.cs" />
     <Compile Include="Optimizers\BisectOptimizer.cs" />
     <Compile Include="Optimizers\RandomOptimizer.cs" />
     <Compile Include="Optimizers\GenericOptimizer.cs" />

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using QuantConnect.Algorithm;
 using QuantConnect.Lean.Engine.Results;
+using QuantConnect.Optimizer.FitnessFunctions;
 using QuantConnect.Packets;
 
 namespace QuantConnect.Optimizer.Optimizers
@@ -49,18 +51,15 @@ namespace QuantConnect.Optimizer.Optimizers
             //Check best ratio
             //TODO Change to LINQ string best = statistics.Max(s => s["ratio"]);
 
-            int bestBacktestIndex = -1;
-            decimal maxRatio = 0;
+            var fitnessFunc = new RandomFitnessFunction();
+            var fitnesses = new Dictionary<int, double>();
             for (int i = 0; i < parameterSets.Count; i++)
             {
-                decimal ratio = Convert.ToDecimal(statistics[i]["Sharpe Ratio"]);
-                if (ratio > maxRatio)
-                {
-                    maxRatio = ratio;
-                    bestBacktestIndex = i;
-                }
+                fitnesses.Add(i, fitnessFunc.Evaluate(statistics[i]));
             }
 
+            var bestBacktestIndex = fitnesses.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+            
             bestParameters = parameterSets[bestBacktestIndex];
 
             return bestParameters;
